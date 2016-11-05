@@ -1,0 +1,44 @@
+﻿<div id="registerForm">
+    <div class="input-group">
+        <div class="input-group-addon"><i class="glyphicon glyphicon-user"></i></div>
+        <input type="text" class="form-control" id="account" onenter="$('#registerForm #password').focus()" placeholder="请输入账号" required>
+    </div>
+    <div class="input-group">
+        <div class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></div>
+        <input type="password" class="form-control" id="password" onenter="$('#registerForm #captcha').focus()" placeholder="请输入密码" required>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="input-group">
+                <div class="input-group-addon"><i class="glyphicon glyphicon-check"></i></div>
+                <input type="text" class="form-control" id="captcha" onenter="$('#btnRegister').click()" placeholder="验证码" required>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <img src="@Url.ToAction("Captcha")" id="imgCaptcha" width="80" height="34" alt="单击可刷新" onclick="refreshImg('imgCaptcha')" />
+            <a href="javascript:void(0)" onclick="refreshImg('imgCaptcha');">换一张</a>
+        </div>
+    </div>
+    <button type="button" class="btn btn-primary btn-block" id="btnRegister" onclick="register(this)" data-loading-text="注册中...">注  册</button>
+</div>
+<script type="text/javascript">
+    function refreshImg(imgId) {
+        var img = $('#' + imgId);
+        var src = img.attr('src').split('?')[0];
+        img.attr('src', src + '?rnd=' + Math.random());
+    }
+
+    function register(obj) {
+        var password = $.trim($('#registerForm #password').val());
+
+        $(obj).button('loading');
+        $.post('@Url.Action("Register", "Home")', {
+            account: $.trim($('#registerForm #account').val()),
+            password: password == '' ? '' : $.md5(password),
+            captcha: $.trim($('#registerForm #captcha').val())
+        }, function (data) {
+            $(obj).button('reset');
+            Message.handle(data, function (url) { location = url; }, 'message');
+        });
+    }
+</script>

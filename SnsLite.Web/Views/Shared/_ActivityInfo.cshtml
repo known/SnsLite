@@ -1,0 +1,23 @@
+﻿@model SnsLite.Activity
+<div class="panel panel-default">
+    <div class="panel-body" style="padding:0;border:1px solid #ccc;">
+        <div class="clearfix" style="padding:15px;">
+            <div class="pull-left" style="margin-right:10px;">
+                <a href="@Url.ToCompanyIndex(Model.User.Account)"><img class="img-thumbnail" alt="SnsLite" src="@Url.ToLogoUrl(Model.User.Avatar)" style="width:60px;height:60px;" /></a>
+            </div>
+            <div class="pull-left">
+                <h4 style="font-size:16px;font-weight:bold;margin-bottom:10px;">@Model.User.Name</h4>
+                <small class="pull-left">@Model.CreateTime.ToAgo()<i class="glyphicon glyphicon-eye-open" style="margin-left:10px;"></i> 浏览@(Model.ViewCount.ToCountHtml())</small>
+            </div>
+        </div>
+        <div style="padding:0 15px 15px 15px;">
+            @Html.RawHtml(Model.Content)
+        </div>
+        <div style="background-color:#f9f9f9;padding:10px 15px;border-top:1px solid #ccc;">
+            <div>
+                <a href=""><i class="glyphicon glyphicon-thumbs-up"></i> 赞@(Model.LikeCount.ToCountHtml())</a>
+                | <a href=""><i class="glyphicon glyphicon-trash"></i> 删除</a>
+            </div>
+        </div>
+    </div>
+</div>

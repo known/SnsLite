@@ -1,0 +1,33 @@
+﻿@model SnsLite.SnsUser
+<div class="modal-dialog" style="width:380px;">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">好友验证</h4>
+        </div>
+        <div class="modal-body">
+            <p>验证消息</p>
+            <textarea id="requestMessage" style="width:350px;height:60px;">@Model.ValidateMessage</textarea>
+            <p id="error"></p>
+            <script type="text/javascript">
+                function addValidateFriend() {
+                    $('#error').html('');
+                    var requestMessage = $.trim($('#requestMessage').val());
+                    if (requestMessage == '') {
+                        Message.showError('error', '请输入验证消息！');
+                        return;
+                    }
+                    $.post('@Url.ToAjax(AjaxRequestType.Relation_ValidateFriend)', {
+                        param: JSON.stringify(['@Model.Id', requestMessage])
+                    }, function (data) {
+                        Message.handle(data, function () { location = location; });
+                    }, 'error');
+                }
+            </script>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary" onclick="addValidateFriend()">确定</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,137 @@
+﻿@model FindUserModel
+@{
+    ViewBag.Title = "找公司";
+}
+@functions {
+    public IHtmlString GetActiveLabelStyle(bool active)
+    {
+        var style = active ? " class=\"label label-primary\"" : "";
+        return Html.Raw(style);
+    }
+}
+<div class="container" style="margin-top:20px;">
+    <div class="row">
+        <div class="col-md-9">
+            <div class="panel panel-default">
+                <div class="panel-heading" style="padding:15px;background-color:transparent;border-bottom:1px solid #ccc;">
+                    <form>
+                        <div class="input-group input-group-lg">
+                            <input type="hidden" name="r" value="@Model.Region" />
+                            <input type="hidden" name="t" value="@Model.Trade" />
+                            <input type="text" class="form-control" name="q" placeholder="输入您要搜索的合作伙伴" value="@Model.Q">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                            </span>
+                        </div>
+                    </form>
+                    <div class="clearfix" style="margin-top:10px;">
+                        <div class="pull-left" style="width:80px;">
+                            <i class="glyphicon glyphicon-map-marker"></i> 按地区
+                        </div>
+                        <div class="pull-left">
+                            @if (Model.Regions != null && Model.Regions.Count > 0)
+                            {
+                                <a href="@Request.AddFragment("r=")"@GetActiveLabelStyle(string.IsNullOrWhiteSpace(Model.Region))>全部</a>
+                                foreach (var item in Model.Regions)
+                                {
+                                    <a href="@Request.AddFragment("r=" + item.Code)"@GetActiveLabelStyle(item.Code == Model.Region)>@item.Name</a>
+                                }
+                            }
+                            else
+                            {
+                                <div class="text-center">暂没有相关地区！</div>
+                            }
+                        </div>
+                    </div>
+                    <div class="clearfix" style="margin-top:10px;">
+                        <div class="pull-left" style="width:80px;">
+                            <i class="glyphicon glyphicon-tag"></i> 按行业
+                        </div>
+                        <div class="pull-left">
+                            @if (Model.Trades != null && Model.Trades.Count > 0)
+                            {
+                                <a href="@Request.AddFragment("t=")"@GetActiveLabelStyle(string.IsNullOrWhiteSpace(Model.Trade))>全部</a>
+                                foreach (var item in Model.Trades)
+                                {
+                                    <a href="@Request.AddFragment("t=" + item.Code)"@GetActiveLabelStyle(item.Code == Model.Trade)>@item.Name</a>
+                                }
+                            }
+                            else
+                            {
+                                <div class="text-center">暂没有相关行业！</div>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body" style="padding:0;">
+                    @if (Model.Companys != null && Model.Companys.Count > 0)
+                    {
+                        <p class="text-primary" style="padding:15px;border-bottom:1px solid #ccc;background-color:#f8f8f8;">@Model.ResultInfo</p>
+                        foreach (var item in Model.Companys)
+                        {
+                            <div class="row" style="margin:0;padding:10px;border-bottom:1px solid #ccc;">
+                                <div class="col-md-3">
+                                    <a href="@Url.ToCompanyIndex(item.Account)" class="thumbnail" style="margin:0;padding:5px;text-decoration:none;">
+                                        <div class="text-center">
+                                            <img alt="SnsLite" src="@Url.ToLogoUrl(item.Avatar)" style="width:100%;height:80px;padding:2px;" />
+                                        </div>
+                                        <div class="container-fluid counts">
+                                            <div class="row">
+                                                <div class="col-xs-4 col-md-4 text-center" style="padding:5px 0;">
+                                                    分享<br />@item.ShareCount
+                                                </div>
+                                                <div class="col-xs-4 col-md-4 text-center" style="padding:5px 0;">
+                                                    关注<br />@item.AttentionCount
+                                                </div>
+                                                <div class="col-xs-4 col-md-4 text-center" style="padding:5px 0;">
+                                                    粉丝<br />@item.FansCount
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-md-9">
+                                    <a href="@Url.ToCompanyIndex(item.Account)" style="margin:0;padding:0;text-decoration:none;">
+                                        <h4 class="text-nowrap text-uppercase" style="overflow:hidden;font-weight:bold;">@item.Name</h4>
+                                    </a>
+                                    <p>@(item.Introduction ?? "该公司暂无简介！")</p>
+                                </div>
+                            </div>
+                        }
+                        @Html.Partial("_Pager", Model)
+                    }
+                    else
+                    {
+                        <div class="text-center" style="padding:15px;">没有搜索到相关公司！</div>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-body" style="padding:0;">
+                    <ul class="nav nav-tabs tabs" style="border-bottom:1px solid #ccc;">
+                        <li class="active"><a href="#active" data-toggle="tab">活跃公司</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="active">
+                            @Html.Partial("_UserGallery", new UserGalleryModel(UserGalleryType.ActiveUser))
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-body" style="padding:0;">
+                    <ul class="nav nav-tabs tabs" style="border-bottom:1px solid #ccc;">
+                        <li class="active"><a href="#newest" data-toggle="tab">最新公司</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="newest">
+                            @Html.Partial("_UserGallery", new UserGalleryModel(UserGalleryType.NewestUser))
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

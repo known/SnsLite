@@ -1,0 +1,9 @@
+﻿@model SnsLite.SnsUser
+@{ 
+    var homeUrl = Model.IsCurrent ? Url.ToHomePublic() : Url.ToCompanyIndex(Model.Account);
+}
+<ul class="nav nav-pills nav-stacked">
+    <li><a href="@homeUrl"><i class="glyphicon glyphicon-home"></i> 公司动态</a></li>
+    <li><a href="@Url.ToAction("Info", "Company", new { u = Model.Account })"><i class="glyphicon glyphicon-info-sign"></i> 公司信息</a></li>
+    @*<li><a href="@Url.ToAction("Index", "Bidding")"><i class="glyphicon glyphicon-stop"></i> 招投标中心</a></li>*@
+</ul>

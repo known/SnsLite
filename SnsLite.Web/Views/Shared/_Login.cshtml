@@ -1,0 +1,31 @@
+﻿<div id="loginForm">
+    <div class="input-group">
+        <div class="input-group-addon"><i class="glyphicon glyphicon-user"></i></div>
+        <input type="text" class="form-control" id="account" onenter="$('#loginForm #password').focus()" placeholder="请输入账号（用户名或邮箱）" required>
+    </div>
+    <div class="input-group">
+        <div class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></div>
+        <input type="password" class="form-control" id="password" onenter="$('#btnLogin').click()" placeholder="请输入密码" required>
+    </div>
+    <div class="checkbox">
+        <label>
+            <input type="checkbox" id="remember"> 记住登录
+        </label>
+    </div>
+    <button type="button" class="btn btn-primary btn-block" id="btnLogin" onclick="login(this)" data-loading-text="登录中...">登  录</button>
+</div>
+<script type="text/javascript">
+    function login(obj) {
+        var password = $.trim($('#loginForm #password').val());
+
+        $(obj).button('loading');
+        $.get('@Url.Action("Login", "Home")', {
+            account: $.trim($('#loginForm #account').val()),
+            password: password == '' ? '' : $.md5(password),
+            rememberMe: $('#loginForm #remember').is(':checked')
+        }, function (data) {
+            $(obj).button('reset');
+            Message.handle(data, function (url) { location = url; }, 'message');
+        });
+    }
+</script>

@@ -1,0 +1,72 @@
+﻿@model SnsLite.SnsUser
+@{
+    var checkFriendValidate = Model.FriendValidate ? " checked=\"checked\"" : "";
+    var checkComment = Model.AllowComment ? " checked=\"checked\"" : "";
+}
+<div class="form-horizontal">
+    <div class="form-group">
+        <label for="Name" class="col-sm-2 control-label">名称</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="Name" name="Name" value="@Model.Name" placeholder="请输入公司全名">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="Email" class="col-sm-2 control-label">Email</label>
+        <div class="col-sm-10">
+            <input type="email" class="form-control" id="Email" name="Email" value="@Model.Email" placeholder="请输入公司Email">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="Mobile" class="col-sm-2 control-label">手机号码</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="Mobile" name="Mobile" value="@Model.Mobile" placeholder="请输入手机号码">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="Introduction" class="col-sm-2 control-label">简介</label>
+        <div class="col-sm-10">
+            <textarea class="form-control" id="Introduction" name="Introduction" style="height:100px;" placeholder="请填写简介">@Model.Introduction</textarea>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">其他选项</label>
+        <div class="col-sm-10">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" id="chkValidate" name="chkValidate" @Html.Raw(checkFriendValidate)> 加好友需要验证
+                </label>
+            </div>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" id="chkComment" name="chkComment" @Html.Raw(checkComment)> 启用评论
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="button" class="btn btn-primary" onclick="saveBase(this)" data-loading-text="保存中...">保存</button>
+            <div id="message"></div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function saveBase(obj) {
+        var param = {
+            Name: $.trim($('#Name').val()),
+            Email: $.trim($('#Email').val()),
+            Mobile: $.trim($('#Mobile').val()),
+            Introduction: $.trim($('#Introduction').val()),
+            FriendValidate: $('#chkValidate').is(':checked'),
+            AllowComment: $('#chkComment').is(':checked')
+        };
+
+        $(obj).button('loading');
+        $.post('@Url.ToAjax(AjaxRequestType.Profile_SaveBasic)', {
+            param: JSON.stringify(param)
+        }, function (data) {
+            $(obj).button('reset');
+            Message.handle(data, function () { $('#compName').html(param.Name); }, 'message');
+        });
+    }
+</script>

@@ -1,0 +1,275 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{5B1E7712-6575-43BB-9275-47E602475AC4}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SnsLite.Web</RootNamespace>
+    <AssemblyName>SnsLite.Web</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Global.asax" />
+    <Content Include="static\css\bootstrap-theme.css" />
+    <Content Include="static\css\bootstrap-theme.min.css" />
+    <Content Include="static\css\bootstrap.css" />
+    <Content Include="static\css\bootstrap.min.css" />
+    <Content Include="static\css\site.css" />
+    <Content Include="packages.config" />
+    <Content Include="static\img\icon_back.png" />
+    <Content Include="static\img\icon_help.png" />
+    <Content Include="static\img\icon_say.png" />
+    <Content Include="static\img\icon_sweep.png" />
+    <Content Include="static\js\bootstrap.js" />
+    <Content Include="static\js\bootstrap.min.js" />
+    <Content Include="static\js\jquery.hhShare.min.js" />
+    <Content Include="static\vendor\citypicker\city-picker.css" />
+    <Content Include="static\vendor\citypicker\city-picker.data.js" />
+    <Content Include="static\vendor\citypicker\city-picker.js" />
+    <Content Include="static\vendor\citypicker\drop-arrow.png" />
+    <Content Include="static\vendor\cropper\cropper.min.css" />
+    <Content Include="static\vendor\cropper\cropper.min.js" />
+    <Content Include="static\css\sitelogo.css" />
+    <Content Include="static\js\sitelogo.js" />
+    <Content Include="static\vendor\emoji1\css\emoji.css" />
+    <Content Include="static\vendor\emoji1\css\nanoscroller.css" />
+    <Content Include="static\vendor\emoji1\img\blank.gif" />
+    <Content Include="static\vendor\emoji1\img\emoji_spritesheet_0.png" />
+    <Content Include="static\vendor\emoji1\img\emoji_spritesheet_1.png" />
+    <Content Include="static\vendor\emoji1\img\emoji_spritesheet_2.png" />
+    <Content Include="static\vendor\emoji1\img\emoji_spritesheet_3.png" />
+    <Content Include="static\vendor\emoji1\img\emoji_spritesheet_4.png" />
+    <Content Include="static\vendor\emoji1\img\IconsetSmiles.png" />
+    <Content Include="static\vendor\emoji1\img\IconsetSmiles_1x.png" />
+    <Content Include="static\vendor\emoji1\img\IconsetW.png" />
+    <Content Include="static\vendor\emoji1\img\IconsetW_1x.png" />
+    <Content Include="static\vendor\emoji1\js\config.js" />
+    <Content Include="static\vendor\emoji1\js\emoji-picker.js" />
+    <Content Include="static\vendor\emoji1\js\jquery.emojiarea.js" />
+    <Content Include="static\vendor\emoji1\js\nanoscroller.min.js" />
+    <Content Include="static\vendor\emoji1\js\tether.min.js" />
+    <Content Include="static\vendor\emoji1\js\util.js" />
+    <Content Include="static\css\font-awesome.css" />
+    <Content Include="static\css\font-awesome.min.css" />
+    <Content Include="static\img\nologo.png" />
+    <Content Include="static\js\jquery.form.js" />
+    <Content Include="static\js\json2.js" />
+    <Content Include="static\vendor\emoji\img\blank.gif" />
+    <Content Include="static\vendor\emoji\img\emoji_spritesheet_0.png" />
+    <Content Include="static\vendor\emoji\img\emoji_spritesheet_1.png" />
+    <Content Include="static\vendor\emoji\img\emoji_spritesheet_2.png" />
+    <Content Include="static\vendor\emoji\img\emoji_spritesheet_3.png" />
+    <Content Include="static\vendor\emoji\img\emoji_spritesheet_4.png" />
+    <Content Include="static\vendor\emoji\img\IconsetSmiles.png" />
+    <Content Include="static\vendor\emoji\img\IconsetSmiles_1x.png" />
+    <Content Include="static\vendor\emoji\img\IconsetW.png" />
+    <Content Include="static\vendor\emoji\img\IconsetW_1x.png" />
+    <Content Include="static\vendor\emoji\jquery.emojiarea.css" />
+    <Content Include="static\vendor\emoji\jquery.emojiarea.js" />
+    <Content Include="static\vendor\emoji\jquery.emojiarea.min.js" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\web.config" />
+    <Content Include="Views\Company\Index.cshtml" />
+    <Content Include="Views\Home\FindUser.cshtml" />
+    <Content Include="Views\Home\FindInfo.cshtml" />
+    <Content Include="static\css\bootstrap-theme.css.map" />
+    <Content Include="static\css\bootstrap.css.map" />
+    <Content Include="static\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="static\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="static\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="static\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="static\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\_UserInfo.cshtml" />
+    <Content Include="Views\Shared\_UserNavigation.cshtml" />
+    <Content Include="static\config.json" />
+    <Content Include="Views\Shared\_ActivityInfo.cshtml" />
+    <Content Include="Views\Shared\_UserGallery.cshtml" />
+    <Content Include="Views\Shared\_Pager.cshtml" />
+    <Content Include="Views\Shared\_Login.cshtml" />
+    <Content Include="Views\Shared\_Register.cshtml" />
+    <Content Include="Views\Company\Info.cshtml" />
+    <Content Include="Views\Home\Public.cshtml" />
+    <Content Include="Views\Shared\_ActivityCategory.cshtml" />
+    <Content Include="Views\Shared\_ActivityList.cshtml" />
+    <Content Include="static\css\font-awesome.css.map" />
+    <Content Include="static\fonts\fontawesome-webfont.eot" />
+    <Content Include="static\fonts\fontawesome-webfont.svg" />
+    <Content Include="static\fonts\fontawesome-webfont.ttf" />
+    <Content Include="static\fonts\fontawesome-webfont.woff" />
+    <Content Include="static\fonts\fontawesome-webfont.woff2" />
+    <Content Include="static\fonts\FontAwesome.otf" />
+    <Content Include="Views\Shared\_ValidateFriend.cshtml" />
+    <Content Include="Views\Home\Profiles\Basic.cshtml" />
+    <Content Include="Views\Home\Profiles\Security.cshtml" />
+    <Content Include="static\vendor\emoji1\css\emoji.css.map" />
+    <Content Include="static\vendor\emoji1\js\emoji-picker.coffee" />
+    <Content Include="static\vendor\emoji1\js\emoji-picker.js.map" />
+    <Content Include="Views\Home\Contents\Company.cshtml" />
+    <Content Include="Views\Shared\_TabPage.cshtml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="static\img\logo.png" />
+    <Content Include="static\js\jquery-1.12.4.min.js" />
+    <Content Include="static\js\jquery.md5.js" />
+    <Content Include="static\js\jquery.min.js" />
+    <Content Include="static\js\site.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AjaxHandlers\ActivityAjaxHandler.cs" />
+    <Compile Include="AjaxHandlers\AjaxHandler.cs" />
+    <Compile Include="AjaxHandlers\AjaxRequestType.cs" />
+    <Compile Include="AjaxHandlers\ParamCheck.cs" />
+    <Compile Include="AjaxHandlers\ProfileAjaxHandler.cs" />
+    <Compile Include="AjaxHandlers\RelationAjaxHandler.cs" />
+    <Compile Include="Configs.cs" />
+    <Compile Include="Controllers\CompanyController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\SnsBaseController.cs" />
+    <Compile Include="Extensions.cs" />
+    <Compile Include="KWeb.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\CompanyIndexModel.cs" />
+    <Compile Include="ViewModels\CompanyInfoModel.cs" />
+    <Compile Include="ViewModels\FindUserModel.cs" />
+    <Compile Include="ViewModels\UserGalleryModel.cs" />
+    <Compile Include="ViewModels\TabPageModel.cs" />
+    <Compile Include="ViewModels\UserModel.cs" />
+    <Compile Include="ViewModels\PublicModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Known\Known.csproj">
+      <Project>{219bc169-ac87-4a24-a7fc-3b8ca364ae9d}</Project>
+      <Name>Known</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SnsLite.Services\SnsLite.Services.csproj">
+      <Project>{f5124bd8-9afe-4e43-8bb7-c6ed3445bd27}</Project>
+      <Name>SnsLite.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SnsLite\SnsLite.csproj">
+      <Project>{34d75349-665e-4c58-b13d-e918c3e3822e}</Project>
+      <Name>SnsLite</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>52453</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:52453/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

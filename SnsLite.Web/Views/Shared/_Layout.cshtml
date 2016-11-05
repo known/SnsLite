@@ -1,0 +1,147 @@
+﻿@{
+    var title = SnsLite.Setting.SiteTitle;
+    var pageTitle = (string)ViewBag.Title;
+    if (!string.IsNullOrEmpty(pageTitle))
+    {
+        title = pageTitle + " - " + title;
+    }
+
+    var inverseClass = !string.IsNullOrEmpty(pageTitle) ? " navbar-inverse" : string.Empty;
+    var url = Request.RawUrl;
+    var indexActive = url.StartsWith("/index") ? "active" : string.Empty;
+    var compActive = url.StartsWith("/find") ? "active" : string.Empty;
+    var infoActive = url.StartsWith("/info") ? "active" : string.Empty;
+}
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="@ViewBag.Description" />
+    <meta name="author" content="known" />
+    <meta name="renderer" content="webkit">
+    <link rel="icon" href="favicon.ico" />
+    <title>@title</title>
+    <link rel="stylesheet" href="~/static/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/static/css/font-awesome.css" />
+    <link rel="stylesheet" href="~/static/css/site.css" />
+    @if (IsSectionDefined("Styles"))
+    {
+        @RenderSection("Styles")
+    }
+    <!--[if lt IE 9]>
+    <script src="@Url.Content("~/static/js/jquery-1.12.4.min.js")"></script>
+    <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!--[if (gte IE 9)|!(IE)]><!-->
+    <script src="~/static/js/jquery.min.js"></script>
+    <!--<![endif]-->
+</head>
+<body>
+    @Html.AntiForgeryToken()
+    <nav class="navbar@(inverseClass) navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">SnsLite</a>
+            </div>
+            <div id="navbar" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="@indexActive"><a href="@Url.ToHomePublic()">首页</a></li>
+                    <li class="@compActive"><a href="@Url.ToAction("FindUser", "Home")">找公司</a></li>
+                    @*<li class="@infoActive"><a href="@Url.ToAction("FindInfo", "Home")">找信息</a></li>*@
+                </ul>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown" style="cursor:pointer;">
+                            <a class="dropdown-toggle" data-toggle="dropdown">@User.Identity.Name <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="@Url.ToAction("Profile", "Home")?t=0">账户设置</a></li>
+                                <li><a href="@Url.ToAction("Content", "Home")?t=0">内容管理</a></li>
+                                <li class="divider"></li>
+                                <li><a onclick="$.get('@Url.ToAction("Logout", "Home")',function(){location='@Url.ToAction("Index", "Home")';});"><span class="fa fa-power-off"></span> 退出</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                }
+            </div>
+        </div>
+    </nav>
+    @RenderBody()
+    <footer class="footer">
+        <p>&copy;2016 SnsLite. All Rights Reserved. 京ICP备11001111号. Powered by Known</p>
+    </footer>
+    <div id="myModal" class="modal fade"></div>
+    <div class="asid_share" id="asid_share">
+        <div class="asid_share_box relative">
+            <a href="#"><img alt="我有话说" title="我有话说" class="adid_icon" src="~/static/img/icon_say.png"></a>
+        </div>
+        <div class="asid_share_box relative">
+            <a href="#"><img alt="新版帮助" title="新版帮助" class="adid_icon" src="~/static/img/icon_help.png"></a>
+            <div class="asid_share_triangle" style="display:none;">
+                <em class="border_sj">&#9670;</em>
+                <span class="con_sj">&#9670;</span>
+            </div>
+            <div class="asid_sha_layer" style="display:none;">
+                <ul class="asid_help_list" style="width:130px;">
+                    <li><a href="#">测试数据</a></li>
+                    <li><a href="#">测试数据</a></li>
+                    <li><a href="#">测试数据</a></li>
+                    <li><a href="#">测试数据</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="asid_share_box relative">
+            <a href="#"><img alt="扫二微码" title="扫二微码" class="adid_icon" src="~/static/img/icon_sweep.png"></a>
+            <div class="asid_share_triangle" style="display:none;">
+                <em class="border_sj">&#9670;</em>
+                <span class="con_sj">&#9670;</span>
+            </div>
+            <div class="asid_sha_layer" style="width:250px;display:none;">
+                <p class="sweep_img"><img src="images/weixin.png" width="220"></p>
+                <p class="pb6"><b>扫一扫上面的二维码图案，加我微信</b></p>
+            </div>
+        </div>
+        <div class="asid_share_box relative" style="display:none;">
+            <a href="#"><img alt="返回顶部" title="返回顶部" class="adid_icon" src="~/static/img/icon_back.png"></a>
+        </div>
+    </div>
+    <script src="~/static/js/bootstrap.js"></script>
+    <script src="~/static/js/jquery.form.js"></script>
+    <script src="~/static/js/jquery.hhShare.min.js"></script>
+    <script src="~/static/js/json2.js"></script>
+    <script src="~/static/js/site.js"></script>
+    @if (IsSectionDefined("Scripts"))
+    {
+        @RenderSection("Scripts")
+    }
+    <script type="text/javascript">
+        'use strict';
+
+        $('input[onenter]').keydown(function (event) {
+            if (event.which == 13) {
+                event.preventDefault();
+                var method = $(this).attr("onenter");
+                eval(method);
+            }
+        });
+
+        $('#asid_share').hhShare({
+            cenBox: 'asid_share_box',
+            icon: 'adid_icon',
+            addClass: 'red_bag',
+            titleClass: 'asid_title',
+            triangle: 'asid_share_triangle',
+            showBox: 'asid_sha_layer'
+        });
+    </script>
+</body>
+</html>

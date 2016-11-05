@@ -1,0 +1,59 @@
+﻿body{
+    padding-top: 50px;
+    background-color:#fdfdfd;
+}
+.footer p{
+    color:#7f8c8d;
+    margin:0;
+    padding:30px 0;
+    text-align:center;
+    background:#2d3e50;
+}
+
+/*asid_share*/
+.asid_share{position:fixed;width:40px;bottom:15%;right:0;z-index:890;}
+*html #asid_share{position:absolute;top:expression(documentElement.scrollTop + "px");margin:300px 0 0 0;}
+
+.asid_share .asid_share_box{width:100%;margin-bottom:3px;background:#d9d9d9;text-align:center;}
+.asid_share .asid_share_box a{display:block;height:35px;padding-top:5px;}
+.asid_share .asid_share_box a:hover{background:#e12500;text-decoration:none;}
+.asid_share .asid_share_box a:hover .asid_title,.asid_share .asid_share_box .asid_title{color:#fff;font-size:12px;display:block;padding-left:6px;line-height:18px;width:30px;margin-top:-2px;}
+.asid_share .red_bag{background:#e12500;text-decoration:none;}
+.asid_share .asid_sha_layer{border:1px solid #ccc;background:#fff;position:absolute;right:47px;bottom:-44px;}
+.sweep_img{padding:10px;}
+.asid_share_box .asid_help_list li{line-height:26px;height:26px;background:url(../images/dian.png) no-repeat 6px 12px;}
+.asid_share_box .asid_help_list li a{line-height:26px;height:26px;padding:0 0 0 14px;text-align:left;}
+.asid_help_list li a:hover{color:#fff;}
+.asid_share_triangle{width:12px;height:40px;position:absolute;right:45px;bottom:-12px;z-index:100;}
+.border_sj,.con_sj{display:block;width:18px;height:28px;font-size:18px;overflow:hidden;font-family: SimSun;}
+.border_sj{color:#ccc;font-style:normal;}
+.con_sj{color:white;margin:-14px -2px 0 0;margin:-28px 0 0 -2px;}
+
+.navbar-brand{font-size:26px;}
+.navbar-nav a{font-size:16px;}
+
+.tabs{margin:0;border-bottom:none;}
+.tabs > li{margin-bottom:0;}
+.tabs > li > a,
+.tabs > li > a:focus{color:#333;border-color:transparent;border-bottom:2px solid transparent;}
+.tabs > li > a:hover, 
+.tabs > li.active > a,
+.tabs > li.active > a:hover, 
+.tabs > li.active > a:focus{color:#0026ff;background-color:transparent;border-color:transparent;border-bottom:2px solid #0094ff;}
+
+.counts .line{border-right:1px solid #ccc;}
+
+/*Home*/
+.jumbotron{background: #1E5B94;color:#fff;padding:80px 0;margin-bottom:0;}
+.jumbotron h1{font-size:300%;padding:20px;display:inline-block;text-align:center;border-bottom:2px solid #fff;}
+#loginTabs{background-color:#fff;padding:30px;}
+#loginTabs .tab-content{padding:20px 30px;}
+#loginTabs .checkbox{margin-bottom:20px;color: #000;}
+#loginTabs .input-group{margin-bottom:20px;}
+#captcha{width:145px;margin-right:5px;}
+
+/*Public*/
+#sharePanel .panel-body{padding:20px;}
+#sharePanel .heading{margin-bottom:10px;font-size:16px;}
+.viewRange li{cursor:pointer;padding:0 8px;height:28px;line-height:28px;}
+.viewRange li:hover{background-color:#f1f1f1;}

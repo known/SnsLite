@@ -1,0 +1,15 @@
+﻿@{
+    var url = Request.RawUrl;
+    var allActive = url.Contains("cate=0") || !url.Contains("cate=") ? "active" : string.Empty;
+    var frienActive = url.Contains("cate=1") ? "active" : string.Empty;
+    var attenActive = url.Contains("cate=2") ? "active" : string.Empty;
+}
+<div class="panel panel-default">
+    <div class="panel-body" style="padding:0;border:1px solid #ccc;">
+        <ul class="nav nav-tabs tabs">
+            <li class="@allActive"><a href="@Html.Raw(Request.AddFragment("cate=0"))">全部</a></li>
+            <li class="@frienActive"><a href="@Html.Raw(Request.AddFragment("cate=1"))">好友</a></li>
+            <li class="@attenActive"><a href="@Html.Raw(Request.AddFragment("cate=2"))">关注</a></li>
+        </ul>
+    </div>
+</div>

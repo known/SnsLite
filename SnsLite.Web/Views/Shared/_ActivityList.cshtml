@@ -1,0 +1,18 @@
+﻿@model List<SnsLite.Activity>
+@if (Model != null && Model.Count > 0)
+{
+    foreach (var item in Model)
+    {
+        @Html.Partial("_ActivityInfo", item)
+    }
+    <div class="text-center" style="margin-bottom:15px;" onclick="loadMoreActivity(this)">加载更多动态</div>
+    <script type="text/javascript">
+        function loadMoreActivity (obj) {
+            $(obj).html('加载中...');
+        }
+    </script>
+}
+else
+{
+    <div class="text-center">暂无分享动态！</div>
+}

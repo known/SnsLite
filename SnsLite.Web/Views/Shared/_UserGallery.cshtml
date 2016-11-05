@@ -1,0 +1,19 @@
+﻿@model UserGalleryModel
+@if (Model.Users != null && Model.Users.Count > 0)
+{
+    <div class="row" style="margin:0;padding:10px 0 0 10px;">
+        @foreach (var item in Model.Users)
+        {
+        <div class="col-md-6 col-xs-6" style="margin:0;padding:0;">
+            <a href="@Url.ToCompanyIndex(item.Account)" class="thumbnail" style="margin:0 10px 10px 0;padding:0;height:80px;text-decoration:none;">
+                <img src="@Url.ToLogoUrl(item.Avatar)" style="height:50px;">
+                <div class="caption text-center text-uppercase" style="height:26px;overflow:hidden;padding:2px;">@item.Name</div>
+            </a>
+        </div>
+        }
+    </div>
+}
+else
+{
+    <div class="text-info text-center" style="padding:10px;">@Model.EmptyText</div>
+}

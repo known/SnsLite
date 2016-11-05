@@ -1,0 +1,87 @@
+﻿@model SnsLite.Company
+@{
+    var checkFriendValidate = Model.FriendValidate ? " checked=\"checked\"" : "";
+    var checkComment = Model.AllowComment ? " checked=\"checked\"" : "";
+}
+<link href="~/static/vendor/citypicker/city-picker.css" rel="stylesheet" />
+<div class="form-horizontal">
+    <div class="form-group">
+        <label for="Code" class="col-sm-2 control-label">公司编码</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="Code" name="Code" value="@Model.Code" placeholder="请输入公司编码">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="Url" class="col-sm-2 control-label">公司网站</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="Url" name="Url" value="@Model.Url" placeholder="请输入公司网站">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="Phone" class="col-sm-2 control-label">固定电话</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="Phone" name="Phone" value="@Model.Phone" placeholder="请输入固定电话">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="Area" class="col-sm-2 control-label">地区</label>
+        <div class="col-sm-10" style="position:relative;">
+            <input type="text" class="form-control" id="Area" name="Area" value="@Model.Phone" readonly data-toggle="city-picker" placeholder="请选择地区">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="Address" class="col-sm-2 control-label">详细地址</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="Address" name="Address" value="@Model.Address" placeholder="请输入详细地址">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="Postcode" class="col-sm-2 control-label">邮编</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="Postcode" name="Postcode" value="@Model.Postcode" placeholder="请输入邮编">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">其他选项</label>
+        <div class="col-sm-10">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" id="chkValidate" name="chkValidate" @Html.Raw(checkFriendValidate)> 加好友需要验证
+                </label>
+            </div>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" id="chkComment" name="chkComment" @Html.Raw(checkComment)> 启用评论
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="button" class="btn btn-primary" onclick="saveBase(this)" data-loading-text="保存中...">保存</button>
+            <div id="message"></div>
+        </div>
+    </div>
+</div>
+<script src="~/static/vendor/citypicker/city-picker.data.js"></script>
+<script src="~/static/vendor/citypicker/city-picker.js"></script>
+<script type="text/javascript">
+    function saveBase(obj) {
+        var param = {
+            Code: $.trim($('#Code').val()),
+            Url: $.trim($('#Url').val()),
+            Phone: $.trim($('#Phone').val()),
+            Address: $.trim($('#Address').val()),
+            Postcode: $('#Postcode').val(),
+            AllowComment: $('#chkComment').is(':checked')
+        };
+
+        @*$(obj).button('loading');
+        $.post('@Url.ToAjax(AjaxRequestType.ProfileBasic)', {
+            param: JSON.stringify(param)
+        }, function (data) {
+            $(obj).button('reset');
+            Message.handle(data, function () { $('#compName').html(param.Name); }, 'message');
+        });*@
+    }
+</script>

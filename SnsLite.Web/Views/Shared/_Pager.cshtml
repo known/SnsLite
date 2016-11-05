@@ -1,0 +1,53 @@
+﻿@model Pagination
+@{ 
+    var displayMaxPage = 9;
+    var spitCount = (int)Math.Floor(displayMaxPage / 2M);
+    var spitLeft = Model.PageCount > displayMaxPage && Model.PageIndex > spitCount + 1;
+    var spitRight = Model.PageCount > displayMaxPage && Model.PageCount - Model.PageIndex >= spitCount + 1;
+    var pageStart = spitLeft ? (spitRight ? Model.PageIndex - spitCount : Model.PageCount - displayMaxPage + 1) : 1;
+    var pageEnd = spitRight ? (spitLeft ? Model.PageIndex + spitCount : displayMaxPage) : Model.PageCount;
+}
+<nav class="text-center">
+    <ul class="pagination">
+        <li><a>@Model.PageIndex / @Model.PageCount</a></li>
+        @if (Model.HasPrevious)
+        {
+            <li><a href="@Request.AddFragment("p=1")" aria-label="First"><span aria-hidden="true" class="fa fa-angle-double-left"></span></a></li>
+            <li><a href="@Request.AddFragment("p=" + (Model.PageIndex - 1))" aria-label="Previous"><span aria-hidden="true" class="fa fa-angle-left"></span></a></li>
+        }
+        else
+        {
+            <li class="disabled"><a aria-label="First"><span aria-hidden="true" class="fa fa-angle-double-left"></span></a></li>
+            <li class="disabled"><a aria-label="Previous"><span aria-hidden="true" class="fa fa-angle-left"></span></a></li>
+        }
+        @if (spitLeft)
+        {
+            <li><a href="@Request.AddFragment("p=" + (Model.PageIndex - spitCount - 1))">&hellip;</a></li>
+        }
+        @for (int i = pageStart; i <= pageEnd; i++)
+        {
+            if (i == Model.PageIndex)
+            {
+                <li class="active"><a>@i <span class="sr-only">(current)</span></a></li>
+            }
+            else
+            {
+                <li><a href="@Request.AddFragment("p=" + i)">@i</a></li>
+            }
+        }
+        @if (spitRight)
+        {
+            <li><a href="@Request.AddFragment("p=" + (Model.PageIndex + spitCount + 1))">&hellip;</a></li>
+        }
+        @if (Model.HasNext)
+        {
+            <li><a href="@Request.AddFragment("p=" + (Model.PageIndex + 1))" aria-label="Next"><span aria-hidden="true" class="fa fa-angle-right"></span></a></li>
+            <li><a href="@Request.AddFragment("p=" + Model.PageCount)" aria-label="Last"><span aria-hidden="true" class="fa fa-angle-double-right"></span></a></li>
+        }
+        else
+        {
+            <li class="disabled"><a aria-label="Next"><span aria-hidden="true" class="fa fa-angle-right"></span></a></li>
+            <li class="disabled"><a aria-label="Last"><span aria-hidden="true" class="fa fa-angle-double-right"></span></a></li>
+        }
+    </ul>
+</nav>
