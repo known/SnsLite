@@ -64,8 +64,7 @@
                         <li class="dropdown" style="cursor:pointer;">
                             <a class="dropdown-toggle" data-toggle="dropdown">@User.Identity.Name <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="@Url.ToAction("Profile", "Home")?t=0">账户设置</a></li>
-                                <li><a href="@Url.ToAction("Content", "Home")?t=0">内容管理</a></li>
+                                <li><a href="@Url.ToAction("Profile", "Home")?t=0">账户中心</a></li>
                                 <li class="divider"></li>
                                 <li><a onclick="$.get('@Url.ToAction("Logout", "Home")',function(){location='@Url.ToAction("Index", "Home")';});"><span class="fa fa-power-off"></span> 退出</a></li>
                             </ul>

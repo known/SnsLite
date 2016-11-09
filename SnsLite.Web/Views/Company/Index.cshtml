@@ -7,18 +7,20 @@
         <div class="col-md-3">
             <div class="panel panel-default">
                 <div class="panel-body" style="border:1px solid #ccc;">
-                    @Html.Partial("_UserInfo", Model.User)
-                </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-body" style="border:1px solid #ccc;">
                     @Html.Partial("_UserNavigation", Model.User)
                 </div>
             </div>
         </div>
-        <div class="col-md-9">
+        <div class="col-md-6">
             @Html.Partial("_ActivityCategory")
             @Html.Partial("_ActivityList", Model.Activities)
+        </div>
+        <div class="col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-body" style="border:1px solid #ccc;">
+                    @Html.Partial("_UserInfo", Model.User)
+                </div>
+            </div>
         </div>
     </div>
 </div>

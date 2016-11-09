@@ -3,19 +3,10 @@
     ViewBag.Title = "首页";
 }
 @section Styles{
-    @if (User.Identity.IsAuthenticated)
-    {
-    <link rel="stylesheet" href="~/static/vendor/emoji/jquery.emojiarea.css" />
-    }
 }
 <div class="container" style="margin-top:20px;min-height:500px;">
     <div class="row">
         <div class="col-md-3">
-            <div class="panel panel-default">
-                <div class="panel-body" style="border:1px solid #ccc;">
-                    @Html.Partial("_UserInfo", Model.User)
-                </div>
-            </div>
             <div class="panel panel-default">
                 <div class="panel-body" style="border:1px solid #ccc;">
                     @Html.Partial("_UserNavigation", Model.User)
@@ -34,48 +25,30 @@
                     }
                     else
                     {
-                        <div class="emoji-picker-container">
-                            <textarea id="emojiContent" class="form-control textarea-control" rows="3" placeholder="您想发布点什么吗？"></textarea>
-                            <div class="row" style="margin-top:10px;">
-                                <div class="col-md-7">
-                                    <span id="btnEmoji" class="fa fa-smile-o" data-container="#popover" data-toggle="popover" data-content="Data Dictionary" style="color:#00f;cursor:pointer;margin-right:10px;"> 表情</span>
-                                    <span id="btnImage" class="fa fa-image" style="color:#00f;cursor:pointer;margin-right:10px;"> 图片</span>
-                                    <span id="btnFile" class="fa fa-file" style="color:#00f;cursor:pointer;"> 附件</span>
-                                </div>
-                                <div class="col-md-5 text-right">
-                                    <input type="hidden" id="viewRange" name="viewRange" value="0" />
-                                    <button type="button" class="btn btn-primary pull-right" onclick="publishActivity()" style="padding:5px 20px;">发布</button>
-                                    <div class="dropdown pull-right">
-                                        <div id="dLabel" style="margin:7px 8px 0 0;cursor:pointer;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <span id="viewRangeText">所有人可见</span>
-                                            <span class="caret"></span>
-                                        </div>
-                                        <ul class="dropdown-menu viewRange" aria-labelledby="dLabel">
-                                            @foreach (var item in Model.ViewRanges)
-                                            {
-                                                <li onclick="setViewRange('@item.Code', '@item.Name')">@item.Name</li>
-                                            }
-                                        </ul>
+                        <textarea id="content" class="form-control textarea-control" rows="3" placeholder="您想发布点什么吗？"></textarea>
+                        <div class="row" style="margin-top:10px;">
+                            <div class="col-md-7">
+                                <span id="btnImage" class="fa fa-image" style="color:#00f;cursor:pointer;margin-right:10px;"> 图片</span>
+                                <span id="btnFile" class="fa fa-file" style="color:#00f;cursor:pointer;"> 附件</span>
+                            </div>
+                            <div class="col-md-5 text-right">
+                                <input type="hidden" id="viewRange" name="viewRange" value="0" />
+                                <button type="button" class="btn btn-primary pull-right" onclick="publishActivity()" style="padding:5px 20px;">发布</button>
+                                <div class="dropdown pull-right">
+                                    <div id="dLabel" style="margin:7px 8px 0 0;cursor:pointer;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <span id="viewRangeText">所有人可见</span>
+                                        <span class="caret"></span>
                                     </div>
+                                    <ul class="dropdown-menu viewRange" aria-labelledby="dLabel">
+                                        @foreach (var item in Model.ViewRanges)
+                                        {
+                                            <li onclick="setViewRange('@item.Code', '@item.Name')">@item.Name</li>
+                                        }
+                                    </ul>
                                 </div>
                             </div>
                         </div>
-                        <div id="popover"></div>
-                        <script src="~/static/vendor/emoji/jquery.emojiarea.js"></script>
                         <script type="text/javascript">
-                            @*$.emojiarea.path = '@Url.Content("~/static/vendor/emoji/img")';
-                            $.emojiarea.icons = {
-                                ':smile:': 'smile.png',
-                                ':angry:': 'angry.png',
-                                ':flushed:': 'flushed.png',
-                                ':neckbeard:': 'neckbeard.png',
-                                ':laughing:': 'laughing.png'
-                            };
-                            var $wysiwyg = $('#emojiContent').emojiarea({
-                                wysiwyg: true,
-                                button: '#btnEmoji'
-                            });*@
-
                             function setViewRange(id, text) {
                                 $('#viewRange').val(id);
                                 $('#viewRangeText').html(text);
@@ -83,9 +56,7 @@
 
                             function publishActivity() {
                                 var viewRange = $.trim($('#viewRange').val());
-                                var content = $wysiwyg.val();
-                                console.log(viewRange);
-                                console.log(content);
+                                var content = $.trim($('#content').val());
                                 $.post('@Url.ToAjax(AjaxRequestType.Activity_AddActivity)', {
                                     param: JSON.stringify([viewRange,content])
                                 }, function (data) {
@@ -101,15 +72,8 @@
         </div>
         <div class="col-md-3">
             <div class="panel panel-default">
-                <div class="panel-body" style="padding:0;">
-                    <ul class="nav nav-tabs tabs" style="border-bottom:1px solid #ccc;">
-                        <li class="active"><a href="#hot" data-toggle="tab">我的好友</a></li>
-                    </ul>
-                    <div class="tab-content">
-                        <div class="tab-pane active" id="hot">
-                            @Html.Partial("_UserGallery", new UserGalleryModel(UserGalleryType.FriendUser, Model.User.Id))
-                        </div>
-                    </div>
+                <div class="panel-body" style="border:1px solid #ccc;">
+                    @Html.Partial("_UserInfo", Model.User)
                 </div>
             </div>
             <div class="panel panel-default">
@@ -120,6 +84,18 @@
                     <div class="tab-content">
                         <div class="tab-pane active" id="hot">
                             @Html.Partial("_UserGallery", new UserGalleryModel(UserGalleryType.RecentVisitor, Model.User.Id))
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-body" style="padding:0;">
+                    <ul class="nav nav-tabs tabs" style="border-bottom:1px solid #ccc;">
+                        <li class="active"><a href="#hot" data-toggle="tab">我的好友</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="hot">
+                            @Html.Partial("_UserGallery", new UserGalleryModel(UserGalleryType.FriendUser, Model.User.Id))
                         </div>
                     </div>
                 </div>
