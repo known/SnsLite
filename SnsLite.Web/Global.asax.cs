@@ -1,4 +1,5 @@
-﻿using SnsLite.Services;
+﻿using Known.Core;
+using SnsLite.Services;
 using System;
 using System.Web;
 using System.Web.Mvc;
@@ -10,6 +11,7 @@ namespace SnsLite.Web
     {
         protected void Application_Start(object sender, EventArgs e)
         {
+            ServiceFactory.RegisterAll();
             SnsServiceFactory.RegisterAll();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);

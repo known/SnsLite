@@ -12,7 +12,7 @@ namespace SnsLite.Services
         public List<Activity> GetNewestActivities(string userId, ActivityCategory category, int pageIndex)
         {
             var sql = Helper.GetActivitySql(category);
-            var sqlPage = Extensions.GetPagingSql(sql, new string[] { "CreateTime desc" }, Setting.ActivitySize, pageIndex);
+            var sqlPage = Utils.GetPagingSql(sql, new string[] { "CreateTime desc" }, Setting.ActivitySize, pageIndex);
             return connection.Query<Activity, SnsUser, Activity>(
                 sqlPage
               , (activity, user) => { activity.User = user; return activity; }
@@ -40,7 +40,7 @@ namespace SnsLite.Services
                 sql += " and ViewRange=0";
             }
 
-            var sqlPage = Extensions.GetPagingSql(sql, new string[] { "CreateTime desc" }, Setting.ActivitySize, pageIndex);
+            var sqlPage = Utils.GetPagingSql(sql, new string[] { "CreateTime desc" }, Setting.ActivitySize, pageIndex);
             return connection.Query<Activity, SnsUser, Activity>(
                 sqlPage
               , (activity, user) => { activity.User = user; return activity; }

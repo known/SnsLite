@@ -47,7 +47,6 @@
     <Compile Include="ActivityService.cs" />
     <Compile Include="CompanyService.cs" />
     <Compile Include="Extensions.cs" />
-    <Compile Include="KService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SnsServiceFactory.cs" />
     <Compile Include="SnsUserHelper.cs" />

@@ -1,5 +1,6 @@
 ﻿using Known.Inners;
 using System;
+using System.Linq;
 
 namespace Known
 {
@@ -114,6 +115,12 @@ namespace Known
         public static void SendMail(string to, string subject, string body)
         {
             Mail.Send(to, subject, body);
+        }
+
+        public static string GetPagingSql(string sql, string[] orderFields, int pageSize, int pageIndex)
+        {
+            var orderBy = string.Join(",", orderFields.Select(f => string.Format("t1.{0}", f)));
+            return string.Format("select top {0} t.* from (select t1.*,row_number() over (order by {1}) RowNo from ({2}) t1) t where t.RowNo>{3}", pageSize, orderBy, sql, pageSize * (pageIndex - 1));
         }
     }
 }

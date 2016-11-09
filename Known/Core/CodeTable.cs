@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Dapper;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -9,6 +10,15 @@ namespace Known.Core
     public interface ICodeTableService
     {
         List<CodeTable> GetAllCodes();
+    }
+
+    public class CodeTableService : ServiceBase, ICodeTableService
+    {
+        public List<CodeTable> GetAllCodes()
+        {
+            var sql = "select * from K_CodeTables where Enabled=1 order by SortNo";
+            return connection.Query<CodeTable>(sql).ToList();
+        }
     }
 
     public class CodeTable
@@ -38,7 +48,7 @@ namespace Known.Core
         {
             Check.Required(category, "category");
 
-            var codes = GetCachedCodes();
+            var codes = Helper.GetCachedCodes();
             if (codes == null || codes.Count == 0)
                 return null;
 
@@ -53,14 +63,35 @@ namespace Known.Core
             foreach (Enum value in values)
             {
                 var code = Convert.ToInt32(value);
-                var name = EnumHelper.GetDescription(value);
+                var name = Helper.GetDescription(value);
                 codes.Add(new CodeTable { Category = category, Code = code.ToString(), Name = name, Enabled = true, SortNo = code + 1 });
             }
             return codes;
         }
 
-        class EnumHelper
+        public static CodeTable GetCode(string category, string code)
         {
+            Check.Required(category, "category");
+            Check.Required(code, "code");
+
+            var codes = GetCodes(category);
+            if (codes == null || codes.Count == 0)
+                return null;
+
+            return codes.FirstOrDefault(c => c.Code == code);
+        }
+
+        class Helper
+        {
+            internal static List<CodeTable> GetCachedCodes()
+            {
+                var cache = Container.Load<ICache>();
+                if (cache == null)
+                    return null;
+
+                return cache.Get<List<CodeTable>>("CodeTable");
+            }
+
             internal static string GetDescription(Enum value)
             {
                 var type = value.GetType();
@@ -81,27 +112,6 @@ namespace Known.Core
                 }
                 return default(T);
             }
-        }
-
-        public static CodeTable GetCode(string category, string code)
-        {
-            Check.Required(category, "category");
-            Check.Required(code, "code");
-
-            var codes = GetCodes(category);
-            if (codes == null || codes.Count == 0)
-                return null;
-
-            return codes.FirstOrDefault(c => c.Code == code);
-        }
-
-        private static List<CodeTable> GetCachedCodes()
-        {
-            var cache = Container.Load<ICache>();
-            if (cache == null)
-                return null;
-
-            return cache.Get<List<CodeTable>>("CodeTable");
         }
     }
 }

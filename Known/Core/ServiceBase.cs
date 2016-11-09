@@ -23,5 +23,11 @@ namespace Known.Core
 
             return service;
         }
+
+        public static void RegisterAll()
+        {
+            Container.Register<ILogService, LogService>();
+            Container.Register<IUserService, UserService>();
+        }
     }
 }

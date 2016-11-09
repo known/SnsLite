@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Dapper;
+using System;
 
 namespace Known.Core
 {
@@ -6,6 +7,34 @@ namespace Known.Core
     {
         void AddActionLog(ActionLog log);
         void AddVisitLog(VisitLog log);
+    }
+
+    public class LogService : ServiceBase, ILogService
+    {
+        public void AddActionLog(ActionLog log)
+        {
+            try
+            {
+                var sql = "insert into K_ActionLogs(UserName,ModuleName,ActionName,VisitTime,FinishTime) values(@UserName,@ModuleName,@ActionName,@VisitTime,@FinishTime)";
+                connection.Execute(sql, log);
+            }
+            catch { }
+        }
+
+        public void AddVisitLog(VisitLog log)
+        {
+            try
+            {
+                if (log.RawUrl.Length > 500)
+                {
+                    log.RawUrl = log.RawUrl.Substring(0, 500);
+                }
+
+                var sql = "insert into K_VisitLogs(UserName,RawUrl,IPAddress,IPAddressName,OSName,Browser,BrowserVersion,VisitTime,FinishTime) values(@UserName,@RawUrl,@IPAddress,@IPAddressName,@OSName,@Browser,@BrowserVersion,@VisitTime,@FinishTime)";
+                connection.Execute(sql, log);
+            }
+            catch { }
+        }
     }
 
     public class VisitLog
